@@ -10,7 +10,9 @@ public class AppointmentBook
     public void printPeriod(int period)
     {
         for(int i = 0; i < schedule[period - 1].length; i++)
+        {
             System.out.println(i + " " + schedule[period - 1][i]);
+        }
     }
 
     /**
@@ -31,7 +33,7 @@ public class AppointmentBook
      */
     private void reserveBlock(int period, int startMinute, int duration)
     {
-
+        for(int i = startMinute; i < startMinute + duration; i++) schedule[period - 1][i] = false;
     }
 
     /**
@@ -62,6 +64,15 @@ public class AppointmentBook
      */
     public boolean makeAppointment(int startPeriod, int endPeriod, int duration)
     {
+        for (int i = startPeriod; i <= endPeriod; i++)
+        {
+            int freeBlock = findFreeBlock(i, duration);
+            if(freeBlock > -1)
+            {
+                reserveBlock(i, freeBlock, duration);
+                return true;
+            }
+        }
         return false;
     }
 }
