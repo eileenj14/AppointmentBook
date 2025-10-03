@@ -30,5 +30,16 @@ public class Main
             period++;
         }
         System.out.println(b.makeAppointment(2,4,22));
+        System.out.println(b.makeAppointment(3,4,3));
+        System.out.println(b.makeAppointment(2,4,30));
+        System.out.println();
+        period = 2;
+        while(period < 5)
+        {
+            System.out.println("Period: " + period);
+            b.printPeriod(period);
+            System.out.println();
+            period++;
+        }
     }
 }
