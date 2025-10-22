@@ -1,6 +1,10 @@
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.util.Scanner;
+
 public class Main
 {
-    public static void main(String[] args)
+    public static void main(String[] args) throws FileNotFoundException
     {
         boolean[][] schedule = new boolean[8][60];
         AppointmentBook a = new AppointmentBook(schedule);
@@ -40,6 +44,29 @@ public class Main
             b.printPeriod(period);
             System.out.println();
             period++;
+        }
+    }
+
+    public static int read() throws FileNotFoundException
+    {
+        int fulfilledAppointments = 0;
+
+        AppointmentBook[] appointmentBooks = new AppointmentBook[1000];
+        File f = new File("Schedules.txt");
+        Scanner s = new Scanner(f);
+        int index = 0;
+        while(s.hasNextLine())
+        {
+            boolean[][] schedule = new boolean[8][60];
+            AppointmentBook a = new AppointmentBook(schedule);
+            for(int p = 0; p < 8; p++)
+            {
+                for(int m = 0; m < 60; m++)
+                {
+                    schedule[p][m] = s.nextBoolean();
+                }
+            }
+            boolean appointmentStatus = a.makeAppointment(s.nextInt(),s.nextInt(),s.nextInt());
         }
     }
 }
