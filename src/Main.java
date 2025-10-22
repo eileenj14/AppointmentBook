@@ -45,16 +45,16 @@ public class Main
             System.out.println();
             period++;
         }
+
+        System.out.println(read() + " appointments are fulfilled.");
     }
 
     public static int read() throws FileNotFoundException
     {
         int fulfilledAppointments = 0;
 
-        AppointmentBook[] appointmentBooks = new AppointmentBook[1000];
         File f = new File("Schedules.txt");
         Scanner s = new Scanner(f);
-        int index = 0;
         while(s.hasNextLine())
         {
             boolean[][] schedule = new boolean[8][60];
@@ -66,7 +66,9 @@ public class Main
                     schedule[p][m] = s.nextBoolean();
                 }
             }
-            boolean appointmentStatus = a.makeAppointment(s.nextInt(),s.nextInt(),s.nextInt());
+            if(a.makeAppointment(s.nextInt(),s.nextInt(),s.nextInt())) fulfilledAppointments++;
         }
+
+        return fulfilledAppointments;
     }
 }
